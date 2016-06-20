@@ -17,8 +17,15 @@ ENV REFRESHED_AT 2016-05-30
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
+    ca-certificates \
     dbus-x11 \
+    fonts-arphic-ukai \
+    fonts-arphic-uming \
+    fonts-gfs-artemisia \
+    fonts-ipafont-gothic \
+    fonts-ipafont-mincho \
     fonts-liberation \
+    fonts-unfonts-core \
     imagemagick \
     libjs-mathjax \
     locales \
@@ -50,14 +57,7 @@ RUN apt-get update && \
     python2.7 \
     wget \
     xdg-utils \
-    xz-utils \
-    # fonts
-    fonts-arphic-ukai \
-    fonts-arphic-uming \
-    fonts-gfs-artemisia \
-    fonts-ipafont-gothic \
-    fonts-ipafont-mincho \
-    fonts-unfonts-core && \
+    xz-utils  && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # locale.
@@ -71,7 +71,7 @@ ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 # calibre latest version.
-RUN wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | \
+RUN wget --no-check-certificate -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | \
     python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()" && \
     rm -rf /tmp/*
 
